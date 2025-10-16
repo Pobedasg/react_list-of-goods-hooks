@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react';
+import classNames from 'classnames';
 import 'bulma/css/bulma.css';
 import './App.scss';
 
@@ -60,9 +61,9 @@ export const App: React.FC = () => {
       <div className="buttons">
         <button
           type="button"
-          className={`button is-info ${
-            sortType === SortType.Alphabetically ? '' : 'is-light'
-          }`}
+          className={classNames('button', 'is-info', {
+            'is-light': sortType !== SortType.Alphabetically,
+          })}
           onClick={handleSortAlphabetically}
         >
           Sort alphabetically
@@ -70,9 +71,9 @@ export const App: React.FC = () => {
 
         <button
           type="button"
-          className={`button is-success ${
-            sortType === SortType.Length ? '' : 'is-light'
-          }`}
+          className={classNames('button', 'is-success', {
+            'is-light': sortType !== SortType.Length,
+          })}
           onClick={handleSortByLength}
         >
           Sort by length
@@ -80,7 +81,9 @@ export const App: React.FC = () => {
 
         <button
           type="button"
-          className={`button is-warning ${isReversed ? '' : 'is-light'}`}
+          className={classNames('button', 'is-warning', {
+            'is-light': !isReversed,
+          })}
           onClick={handleReverse}
         >
           Reverse
@@ -89,7 +92,7 @@ export const App: React.FC = () => {
         {isModified && (
           <button
             type="button"
-            className="button is-danger is-light"
+            className={classNames('button', 'is-danger', 'is-light')}
             onClick={handleReset}
           >
             Reset
